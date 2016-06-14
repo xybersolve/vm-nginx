@@ -15,6 +15,7 @@ Vagrant.configure("2") do |config|
   config.vm.box = "hashicorp/precise32"
   config.vm.hostname = "webdev"
   config.vm.provision "shell", path:"provision.sh"
+  config.vm.network "forwarded_port", guest: 80, host: 8080, id: "nginx"  
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
