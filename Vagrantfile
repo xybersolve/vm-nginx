@@ -16,6 +16,11 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = "webdev"
   config.vm.provision "shell", path:"provision.sh"
   config.vm.network "forwarded_port", guest: 80, host: 8080, id: "nginx"  
+  # map specific folders we need
+  # first disable default folders
+  config.vm.synced_folder ".", "/vagrant", disabled: true  
+  config.vm.synced_folder "www", "/vagrant/www"
+  config.vm.synced_folder "sites-enabled", "/vagrant/sites-enabled" 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
@@ -66,7 +71,7 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  # config.vm.provision "shell", inline: <<-SHELL
+  # config.v20m.provision "shell", inline: <<-SHELL
   #   apt-get update
   #   apt-get install -y apache2
   # SHELL
